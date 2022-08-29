@@ -7,10 +7,10 @@ import { UserModule } from './pages/user/user.module';
 import { UserController } from './pages/user/user.controller';
 import { AuthModule } from './pages/auth/auth.module';
 // import { TestUserModule } from './pages/test.user/user.module';
-import { ProductModule } from './pages/product/product.module';
-import { OrderModule } from './pages/order/order.module';
-import { CartModule } from './pages/cart/cart.module';
-import { CouponModule } from './pages/coupon/coupon.module';
+// import { ProductModule } from './pages/product/product.module';
+// import { OrderModule } from './pages/order/order.module';
+// import { CartModule } from './pages/cart/cart.module';
+// import { CouponModule } from './pages/coupon/coupon.module';
 import { FileModule } from './pages/file/file.module';
 import { MailerModule } from './pages/mailer/mailer.module';
 // import { SpiderModule } from './pages/spider/spider.module';
@@ -25,10 +25,10 @@ import { PowerfulModule } from './pages/powerful/powerful.module';
     // TestUserModule,
     UserModule,
     AuthModule,
-    ProductModule,
-    OrderModule,
-    CartModule,
-    CouponModule,
+    // ProductModule,
+    // OrderModule,
+    // CartModule,
+    // CouponModule,
     FileModule,
     MailerModule,
     // SpiderModule,
