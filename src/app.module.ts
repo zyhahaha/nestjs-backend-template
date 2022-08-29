@@ -16,7 +16,7 @@ import { MailerModule } from './pages/mailer/mailer.module';
 // import { SpiderModule } from './pages/spider/spider.module';
 
 import { WsStartGateway } from './ws/ws.gateway'
-import { PowerfulModule } from './pages/powerful/powerful.module';
+// import { PowerfulModule } from './pages/powerful/powerful.module';
 
 // import dbConfig from 'src/config/db';
 
@@ -32,7 +32,7 @@ import { PowerfulModule } from './pages/powerful/powerful.module';
     FileModule,
     MailerModule,
     // SpiderModule,
-    PowerfulModule,
+    // PowerfulModule,
     // MongooseModule.forRoot(dbConfig.mongodb.url)
   ],
   controllers: [AppController, UserController],
