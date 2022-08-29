@@ -7,10 +7,6 @@ import { HttpExceptionFilter } from './filter/http-exception.filter';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-// import QueryIspa from 'src/pages/spider/module/query.ispa'
-// import QueryDJH from 'src/pages/spider/module/query.djh'
-// import QueryJDVSP from 'src/pages/spider/module/query.jdvsp'
-
 import { WsAdapter } from './ws/ws.adapter';
 
 async function bootstrap() {
@@ -40,16 +36,5 @@ async function bootstrap() {
 
   app.enableCors();
   await app.listen(3000);
-
-  // 定时任务
-  // const cookieIspaStr = await QueryIspa.getIspaCookie();
-  // const cookieDjhStr = await QueryDJH.getDjhCookie();
-  // const cookieJdvspStr = await QueryJDVSP.getCookie();
-  // (new QueryIspa(cookieIspaStr)).runBatch();
-  // (new QueryDJH(cookieDjhStr)).runBatch();
-  // (new QueryJDVSP(cookieJdvspStr)).runBatch();
 }
 bootstrap();
-
-// 获取本机ip地址
-// os.networkInterfaces()
