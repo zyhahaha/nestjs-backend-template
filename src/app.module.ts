@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { UserModule } from './pages/user/user.module';
 import { UserController } from './pages/user/user.controller';
 import { AuthModule } from './pages/auth/auth.module';
-// import { TestUserModule } from './pages/test.user/user.module';
+import { TestUserModule } from './pages/test.user/user.module';
 import { FileModule } from './pages/file/file.module';
 import { MailerModule } from './pages/mailer/mailer.module';
 
@@ -16,7 +16,7 @@ import dbConfig from 'src/config/db';
 
 @Module({
   imports: [
-    // TestUserModule,
+    TestUserModule,
     UserModule,
     AuthModule,
     FileModule,

@@ -9,14 +9,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Get('/djh')
-  getDJH(): string {
-    return this.appService.getDJH();
-  }
-
-  @Get('/jdvsp')
-  getJDVSP(): string {
-    return this.appService.getJDVSP();
-  }
 }
