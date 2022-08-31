@@ -25,7 +25,7 @@ const uploadToken = putPolicy.uploadToken(mac);
 @Injectable()
 export class FileService {
   createFileOSS(@UploadedFile() file: Express.Multer.File) {
-    console.log('==============>>>', file);
+    // console.log('==============>>>', file);
     // 创建一个bufferstream可读流
     const bufferStream = new PassThrough();
     bufferStream.end(file.buffer);
@@ -46,11 +46,11 @@ export class FileService {
           throw respErr;
         }
         if (respInfo.statusCode == 200) {
-          console.log(respBody);
+          // console.log(respBody);
           this.createDbData(fileName, suffix, file.size)
         } else {
-          console.log(respInfo.statusCode);
-          console.log(respBody);
+          // console.log(respInfo.statusCode);
+          // console.log(respBody);
         }
       },
     );

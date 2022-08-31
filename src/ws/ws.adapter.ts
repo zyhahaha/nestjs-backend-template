@@ -9,12 +9,12 @@ export class WsAdapter implements WebSocketAdapter {
     constructor(private app: INestApplicationContext) { }
 
     create(port: number, options: any = {}): any {
-        console.log('ws create')
+        // console.log('ws create')
         return new WebSocket.Server({ port, ...options });
     }
 
     bindClientConnect(server, callback: Function) {
-        console.log('ws bindClientConnect, server:\n', server);
+        // console.log('ws bindClientConnect, server:\n', server);
         server.on('connection', callback);
     }
 
@@ -23,7 +23,7 @@ export class WsAdapter implements WebSocketAdapter {
         handlers: MessageMappingProperties[],
         process: (data: any) => Observable<any>,
     ) {
-        console.log('[waAdapter]有新的连接进来')
+        // console.log('[waAdapter]有新的连接进来')
         fromEvent(client, 'message')
             .pipe(
                 mergeMap(data => this.bindMessageHandler(client, data, handlers, process)),
