@@ -33,12 +33,14 @@ export class UserController {
   }
 
   // 删除用户
+  @UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.usersService.remove(+id);
   }
 
   // 修改用户密码
+  @UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
   @Patch('/updatepw/:id')
   async update(
     @Param('id') id: string,
