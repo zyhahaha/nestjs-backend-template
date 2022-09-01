@@ -3,7 +3,6 @@ import { MailerService } from './mailer.service';
 import { MailerController } from './mailer.controller';
 import { MailerModule as mailerMe } from '@nestjs-modules/mailer';
 import mailerConfig from 'src/config/mailer'
-// import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
 
 @Module({
   controllers: [MailerController],
