@@ -5,8 +5,11 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { UserService } from './user.service';
 // 引入创建用户 DTO 用于限制从接口处传来的参数
 import { RegisterInfoDTO } from './dto/user.dto';
+import { ApiTags } from '@nestjs/swagger';
+
+@ApiTags('Mongodb Test')
 // 配置局部路由
-@Controller('user')
+@Controller('mongo')
 export class UserController {
     constructor(private readonly userService: UserService) { }
     // 创建user路由 user/createUser

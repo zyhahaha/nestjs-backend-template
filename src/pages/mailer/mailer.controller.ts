@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MailerService } from './mailer.service';
 import { CreateMailerDto } from './dto/create-mailer.dto';
 import { UpdateMailerDto } from './dto/update-mailer.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('邮件')
 @Controller('mailer')
 export class MailerController {
   constructor(private readonly mailerService: MailerService) {}

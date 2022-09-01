@@ -12,4 +12,4 @@ import { UserSchema } from './user.schema';
     controllers: [UserController],
     providers: [UserService],
 })
-export class TestUserModule { }
+export class TestMongodbModule { }
