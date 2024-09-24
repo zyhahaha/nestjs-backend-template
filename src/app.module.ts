@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+// import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './pages/user/user.module';
 import { UserController } from './pages/user/user.controller';
 import { AuthModule } from './pages/auth/auth.module';
-import { TestMongodbModule } from './pages/test.mongodb/user.module';
+// import { TestMongodbModule } from './pages/test.mongodb/user.module';
 import { FileModule } from './pages/file/file.module';
 // import { MailerModule } from './pages/mailer/mailer.module';
 
@@ -16,12 +16,12 @@ import dbConfig from 'src/config/db';
 
 @Module({
   imports: [
-    TestMongodbModule,
+    // TestMongodbModule,
     UserModule,
     AuthModule,
     FileModule,
     // MailerModule,
-    MongooseModule.forRoot(dbConfig.mongodb.url)
+    // MongooseModule.forRoot(dbConfig.mongodb.url)
   ],
   controllers: [AppController, UserController],
   providers: [AppService, WsStartGateway],
