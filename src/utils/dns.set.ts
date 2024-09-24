@@ -1,10 +1,10 @@
-import DNSConfig from 'src/config/dns'
+// import DNSConfig from 'src/config/dns'
 const Core = require('@alicloud/pop-core');
 let client = new Core({
-    accessKeyId: DNSConfig.accessKeyId,
-    accessKeySecret: DNSConfig.accessKeySecret,
-    endpoint: DNSConfig.endpoint,
-    apiVersion: DNSConfig.apiVersion
+    // accessKeyId: DNSConfig.accessKeyId,
+    // accessKeySecret: DNSConfig.accessKeySecret,
+    // endpoint: DNSConfig.endpoint,
+    // apiVersion: DNSConfig.apiVersion
 });
 
 // 2408:8244:620:d50:e2cb:4eff:fe86:3543
