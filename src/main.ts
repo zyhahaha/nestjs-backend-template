@@ -7,7 +7,7 @@ import { HttpExceptionFilter } from './filter/http-exception.filter';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-import { WsAdapter } from './ws/ws.adapter';
+// import { WsAdapter } from './ws/ws.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -32,7 +32,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-doc', app, document);
 
-  app.useWebSocketAdapter(new WsAdapter(app)); // 使用我们的适配器
+  // app.useWebSocketAdapter(new WsAdapter(app)); // 使用我们的适配器
 
   app.enableCors();
   await app.listen(3000);

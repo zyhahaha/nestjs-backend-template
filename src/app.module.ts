@@ -10,7 +10,7 @@ import { AuthModule } from './pages/auth/auth.module';
 import { FileModule } from './pages/file/file.module';
 // import { MailerModule } from './pages/mailer/mailer.module';
 
-import { WsStartGateway } from './ws/ws.gateway'
+// import { WsStartGateway } from './ws/ws.gateway'
 
 import dbConfig from 'src/config/db';
 
@@ -24,6 +24,6 @@ import dbConfig from 'src/config/db';
     // MongooseModule.forRoot(dbConfig.mongodb.url)
   ],
   controllers: [AppController, UserController],
-  providers: [AppService, WsStartGateway],
+  providers: [AppService],
 })
 export class AppModule {}
