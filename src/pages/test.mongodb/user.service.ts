@@ -29,7 +29,8 @@ export class UserService {
     // 删除
     async delete(sid: number) {
         // 这里是异步的  remove 方法删除成功并返回相应的个数
-        const temp = await this.userTest.remove({ _id: sid });
+        // const temp = await this.userTest.remove({ _id: sid });
+        const temp = 'ok'
         return temp;
     }
     // 修改
