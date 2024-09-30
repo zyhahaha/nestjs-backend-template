@@ -1,7 +1,19 @@
-### Template Nestjs
+# Template Nestjs
 
-src/config没有提交到仓库，所以直接运行会报错，这里面主要是数据库相关的敏感配置
-**有数据库资源的可以自行配置**
-如果需要该配置文件可以发邮件联系我，我会发给你我的开发数据库配置文件，给你临时使用
-邮箱：980355088@qq.com
+基于Nestjs的后端项目快速开发模板
 
+### 功能列表
+* 用户管理
+* Mysql数据库操作
+* Redis数据库操作
+* MongoDB数据库操作
+* 文件上传
+
+### 特性
+* 支持
+* 支持Docker部署
+* 支持ESLint
+* 支持TypeScript
+* 支持JWT权限验证
+* 支持Swagger API文档
+* 支持TypeORM操作数据库
