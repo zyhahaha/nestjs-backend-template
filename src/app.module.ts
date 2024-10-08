@@ -29,6 +29,7 @@ import { FileModule } from './pages/file/file.module';
       username: dbConfig.mysql.user,
       password: dbConfig.mysql.password,
       database: dbConfig.mysql.database,
+      timezone: '+08:00',
       entities: [],
       synchronize: false,
     }),
