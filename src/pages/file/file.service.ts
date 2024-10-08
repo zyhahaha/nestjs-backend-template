@@ -10,7 +10,7 @@ import { generateUUID, getFileSuffix } from 'src/utils/index'
 import sequelize from 'src/database/sequelize'; // 引入 Sequelize 实例
 
 const config: any = new qiniu.conf.Config();
-config.zone = qiniu.zone.Zone_z2; // 空间对应的机房
+config.zone = qiniu.zone.Zone_z0; // 空间对应的机房
 const accessKey = 'accessKey';
 const secretKey = 'secretKey';
 const mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
