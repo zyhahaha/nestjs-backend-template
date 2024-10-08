@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 // import { MongooseModule } from '@nestjs/mongoose';
+import dbConfig from 'src/config/db';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,8 +14,6 @@ import { FileModule } from './pages/file/file.module';
 
 // import { WsStartGateway } from './ws/ws.gateway'
 
-import dbConfig from 'src/config/db';
-
 @Module({
   imports: [
     // TestMongodbModule,
@@ -22,6 +22,16 @@ import dbConfig from 'src/config/db';
     FileModule,
     // MailerModule,
     // MongooseModule.forRoot(dbConfig.mongodb.url)
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: dbConfig.mysql.host,
+      port: dbConfig.mysql.port,
+      username: dbConfig.mysql.user,
+      password: dbConfig.mysql.password,
+      database: dbConfig.mysql.database,
+      entities: [],
+      synchronize: false,
+    }),
   ],
   controllers: [AppController, UserController],
   providers: [AppService],
