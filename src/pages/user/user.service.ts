@@ -21,10 +21,10 @@ export class UserService {
     // 分页查询条件
     const pageOffsetSize = (pageIndex - 1) * pageSize < 0 ? 0 : (pageIndex - 1) * pageSize;
     
-    const queryDb = await this.userRepository.createQueryBuilder('shop_user');
-    queryDb.where("shop_user.username like :username", { username: `%${account}%` })
-    .andWhere("shop_user.mobile like :mobile", { mobile: `%${mobile}%` })
-    queryDb.orderBy('shop_user.id', 'DESC');
+    const queryDb = await this.userRepository.createQueryBuilder();
+    queryDb.where("username like :username", { username: `%${account}%` })
+    .andWhere("mobile like :mobile", { mobile: `%${mobile}%` })
+    queryDb.orderBy('id', 'DESC');
 
     const count = await queryDb.getCount();
     queryDb.limit(pageSize);
