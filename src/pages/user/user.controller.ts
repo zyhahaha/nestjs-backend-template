@@ -74,12 +74,12 @@ export class UserController {
         return this.authService.certificate(authResult.user);
       case 2:
         return {
-          code: 600,
+          code: 400,
           msg: `账号或密码不正确`,
         };
       default:
         return {
-          code: 600,
+          code: 400,
           msg: `查无此人`,
         };
     }
