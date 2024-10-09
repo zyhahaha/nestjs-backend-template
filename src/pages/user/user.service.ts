@@ -2,63 +2,87 @@ import { Injectable } from '@nestjs/common';
 import * as Sequelize from 'sequelize'; // 引入 Sequelize 库
 import sequelize from 'src/database/sequelize'; // 引入 Sequelize 实例
 
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { UserEntity } from './user.entity';
+
 import { makeSalt, encryptPassword } from 'src/utils/cryptogram'; // 引入加密函数
 
 @Injectable()
 export class UserService {
-  async findAll(requestBody: any) {
-    const { pageIndex = 1, pageSize = 10, account = '', mobile = '' } = requestBody;
-    // 分页查询条件
-    const currentIndex =
-      (pageIndex - 1) * pageSize < 0 ? 0 : (pageIndex - 1) * pageSize;
-    const queryListSQL = `
-      SELECT
-        id, username, mobile, avatar,
-        DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') createTime,
-        DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') updateTime
-      FROM
-        shop_user
-      WHERE
-        username LIKE '%${account}%'
-        AND
-        mobile LIKE '%${mobile}%'
-      ORDER BY
-        id DESC
-      LIMIT ${currentIndex}, ${pageSize}
-    `;
-    const userList: any[] = await sequelize.query(queryListSQL, {
-      type: Sequelize.QueryTypes.SELECT,
-      raw: true,
-      logging: false,
-    });
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+  ) { }
 
-    // 统计数据条数
-    const countListSQL = `
-      SELECT
-        COUNT(*) AS total
-      FROM
-        shop_user
-      WHERE
-        username LIKE '%${account}%'
-        AND
-        mobile LIKE '%${mobile}%'
-    `;
-    const count: any = (
-      await sequelize.query(countListSQL, {
-        type: Sequelize.QueryTypes.SELECT,
-        raw: true,
-        logging: false,
-      })
-    )[0];
+  // 获取文章列表
+  async findAll(requestBody): Promise<any> {
+    const qb = await this.userRepository.createQueryBuilder('shop_user');
+    qb.where('1 = 1');
+    qb.orderBy('shop_user.create_time', 'DESC');
 
-    return {
-      code: 200,
-      data: {
-        list: userList,
-        total: count.total,
-      },
-    };
+    const count = await qb.getCount();
+    const { pageNum = 1, pageSize = 10, ...params } = requestBody;
+    qb.limit(pageSize);
+    qb.offset(pageSize * (pageNum - 1));
+
+    const posts = await qb.getMany();
+    return { list: posts, count: count };
   }
+
+  // async findAll(requestBody: any) {
+  //   const { pageIndex = 1, pageSize = 10, account = '', mobile = '' } = requestBody;
+  //   // 分页查询条件
+  //   const currentIndex =
+  //     (pageIndex - 1) * pageSize < 0 ? 0 : (pageIndex - 1) * pageSize;
+  //   const queryListSQL = `
+  //     SELECT
+  //       id, username, mobile, avatar,
+  //       DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') createTime,
+  //       DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') updateTime
+  //     FROM
+  //       shop_user
+  //     WHERE
+  //       username LIKE '%${account}%'
+  //       AND
+  //       mobile LIKE '%${mobile}%'
+  //     ORDER BY
+  //       id DESC
+  //     LIMIT ${currentIndex}, ${pageSize}
+  //   `;
+  //   const userList: any[] = await sequelize.query(queryListSQL, {
+  //     type: Sequelize.QueryTypes.SELECT,
+  //     raw: true,
+  //     logging: false,
+  //   });
+
+  //   // 统计数据条数
+  //   const countListSQL = `
+  //     SELECT
+  //       COUNT(*) AS total
+  //     FROM
+  //       shop_user
+  //     WHERE
+  //       username LIKE '%${account}%'
+  //       AND
+  //       mobile LIKE '%${mobile}%'
+  //   `;
+  //   const count: any = (
+  //     await sequelize.query(countListSQL, {
+  //       type: Sequelize.QueryTypes.SELECT,
+  //       raw: true,
+  //       logging: false,
+  //     })
+  //   )[0];
+
+  //   return {
+  //     code: 200,
+  //     data: {
+  //       list: userList,
+  //       total: count.total,
+  //     },
+  //   };
+  // }
 
   // 修改密码
   async updatePW(id: number, requestBody: any) {
