@@ -62,16 +62,9 @@ export class UserService {
         msg: '两次密码输入不一致',
       };
     }
-
     const salt = makeSalt(); // 制作密码盐
     const hashPwd = encryptPassword(password, salt); // 加密密码
-
-    const queryDb = await this.userRepository.createQueryBuilder('shop_user');
-    queryDb.update().set({ password: hashPwd, password_salt: salt, password_origin: password });
-    queryDb.where("shop_user.id = :id", { id });
-    await queryDb.execute();
-    console.log(queryDb.getSql());
-
+    this.userRepository.update(id, { password: hashPwd, password_salt: salt, password_origin: password })
     return {
       code: 200,
       msg: 'Success',
