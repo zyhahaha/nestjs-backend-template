@@ -66,18 +66,12 @@ export class UserService {
     const salt = makeSalt(); // 制作密码盐
     const hashPwd = encryptPassword(password, salt); // 加密密码
 
-    const updateSQL = `
-      UPDATE
-        shop_user
-      SET
-        password = '${hashPwd}',
-        password_salt = '${salt}',
-        password_origin = ${password}
-      WHERE
-        id = ${id}
-    `;
-    // const transaction = await sequelize.transaction();
-    await sequelize.query(updateSQL, { logging: false });
+    const queryDb = await this.userRepository.createQueryBuilder('shop_user');
+    queryDb.update().set({ password: hashPwd, password_salt: salt, password_origin: password });
+    queryDb.where("shop_user.id = :id", { id });
+    await queryDb.execute();
+    console.log(queryDb.getSql());
+
     return {
       code: 200,
       msg: 'Success',
@@ -96,8 +90,8 @@ export class UserService {
         msg: '两次密码输入不一致',
       };
     }
-    const user = await this.findOne(accountName);
-    if (user) {
+    const userList = await this.findOne(accountName);
+    if (userList.length) {
       return {
         code: 400,
         msg: '用户已存在',
