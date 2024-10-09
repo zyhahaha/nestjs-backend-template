@@ -23,7 +23,14 @@ export class UserController {
   constructor(
     private readonly authService: AuthService,
     private readonly usersService: UserService,
-  ) {}
+  ) { }
+  
+  // 添加用户
+  @Post('register')
+  async register(@Body() body: RegisterInfoDTO) {
+    // 指定 DTO类型
+    return await this.usersService.register(body);
+  }
 
   // 查询用户列表
   @UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
@@ -76,12 +83,5 @@ export class UserController {
           msg: `查无此人`,
         };
     }
-  }
-
-  // 添加用户
-  @Post('register')
-  async register(@Body() body: RegisterInfoDTO) {
-    // 指定 DTO类型
-    return await this.usersService.register(body);
   }
 }
