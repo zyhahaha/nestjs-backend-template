@@ -17,72 +17,30 @@ export class UserService {
 
   // 获取文章列表
   async findAll(requestBody): Promise<any> {
-    const qb = await this.userRepository.createQueryBuilder('shop_user');
-    qb.where('1 = 1');
-    qb.orderBy('shop_user.create_time', 'DESC');
+    const { pageIndex = 1, pageSize = 10, account = '', mobile = '' } = requestBody;
+    // 分页查询条件
+    const currentIndex = (pageIndex - 1) * pageSize < 0 ? 0 : (pageIndex - 1) * pageSize;
+    
+    const queryDb = await this.userRepository.createQueryBuilder('shop_user');
+    queryDb.where("shop_user.username like :username", { username: `%${account}%` })
+    .andWhere("shop_user.mobile like :mobile", { mobile: `%${mobile}%` })
+    queryDb.orderBy('shop_user.id', 'DESC');
 
-    const count = await qb.getCount();
-    const { pageNum = 1, pageSize = 10, ...params } = requestBody;
-    qb.limit(pageSize);
-    qb.offset(pageSize * (pageNum - 1));
+    const count = await queryDb.getCount();
+    queryDb.limit(pageSize);
+    queryDb.offset(currentIndex);
 
-    const posts = await qb.getMany();
-    return { list: posts, count: count };
+    console.log(queryDb.getSql());
+
+    const userList = await queryDb.getMany();
+    return {
+      code: 200,
+      data: {
+        list: userList,
+        total: count,
+      },
+    };
   }
-
-  // async findAll(requestBody: any) {
-  //   const { pageIndex = 1, pageSize = 10, account = '', mobile = '' } = requestBody;
-  //   // 分页查询条件
-  //   const currentIndex =
-  //     (pageIndex - 1) * pageSize < 0 ? 0 : (pageIndex - 1) * pageSize;
-  //   const queryListSQL = `
-  //     SELECT
-  //       id, username, mobile, avatar,
-  //       DATE_FORMAT(create_time, '%Y-%m-%d %H:%i:%s') createTime,
-  //       DATE_FORMAT(update_time, '%Y-%m-%d %H:%i:%s') updateTime
-  //     FROM
-  //       shop_user
-  //     WHERE
-  //       username LIKE '%${account}%'
-  //       AND
-  //       mobile LIKE '%${mobile}%'
-  //     ORDER BY
-  //       id DESC
-  //     LIMIT ${currentIndex}, ${pageSize}
-  //   `;
-  //   const userList: any[] = await sequelize.query(queryListSQL, {
-  //     type: Sequelize.QueryTypes.SELECT,
-  //     raw: true,
-  //     logging: false,
-  //   });
-
-  //   // 统计数据条数
-  //   const countListSQL = `
-  //     SELECT
-  //       COUNT(*) AS total
-  //     FROM
-  //       shop_user
-  //     WHERE
-  //       username LIKE '%${account}%'
-  //       AND
-  //       mobile LIKE '%${mobile}%'
-  //   `;
-  //   const count: any = (
-  //     await sequelize.query(countListSQL, {
-  //       type: Sequelize.QueryTypes.SELECT,
-  //       raw: true,
-  //       logging: false,
-  //     })
-  //   )[0];
-
-  //   return {
-  //     code: 200,
-  //     data: {
-  //       list: userList,
-  //       total: count.total,
-  //     },
-  //   };
-  // }
 
   // 修改密码
   async updatePW(id: number, requestBody: any) {
