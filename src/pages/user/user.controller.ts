@@ -12,7 +12,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../auth/auth.service';
 import { UserService } from './user.service';
-import { ValidationPipe } from '../../pipe/validation.pipe';
+import { ValidationPipe } from 'src/pipe/validation.pipe';
 import { LoginDTO, RegisterInfoDTO } from './dto/user.dto'; // 引入 DTO
 import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 
