@@ -50,7 +50,7 @@ export class UserService {
     const queryDb = await this.userRepository.createQueryBuilder('shop_user');
     queryDb.where("shop_user.username = :username", { username });
     const userList = await queryDb.getMany();
-    return userList;
+    return userList[0];
   }
 
   // 修改密码
@@ -83,8 +83,8 @@ export class UserService {
         msg: '两次密码输入不一致',
       };
     }
-    const userList = await this.findOne(accountName);
-    if (userList.length) {
+    const user = await this.findOne(accountName);
+    if (user) {
       return {
         code: 400,
         msg: '用户已存在',
