@@ -19,7 +19,7 @@ export class UserService {
   async findAll(requestBody): Promise<any> {
     const { pageIndex = 1, pageSize = 10, account = '', mobile = '' } = requestBody;
     // 分页查询条件
-    const currentIndex = (pageIndex - 1) * pageSize < 0 ? 0 : (pageIndex - 1) * pageSize;
+    const pageOffsetSize = (pageIndex - 1) * pageSize < 0 ? 0 : (pageIndex - 1) * pageSize;
     
     const queryDb = await this.userRepository.createQueryBuilder('shop_user');
     queryDb.where("shop_user.username like :username", { username: `%${account}%` })
@@ -28,7 +28,7 @@ export class UserService {
 
     const count = await queryDb.getCount();
     queryDb.limit(pageSize);
-    queryDb.offset(currentIndex);
+    queryDb.offset(pageOffsetSize);
 
     console.log(queryDb.getSql());
 
