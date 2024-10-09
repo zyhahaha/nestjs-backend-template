@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import * as Sequelize from 'sequelize'; // 引入 Sequelize 库
-import sequelize from 'src/database/sequelize'; // 引入 Sequelize 实例
+// import * as Sequelize from 'sequelize'; // 引入 Sequelize 库
+// import sequelize from 'src/database/sequelize'; // 引入 Sequelize 实例
 
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -92,34 +92,30 @@ export class UserService {
     }
     const salt = makeSalt(); // 制作密码盐
     const hashPwd = encryptPassword(password, salt); // 加密密码
-    const registerSQL = `
-      INSERT INTO shop_user
-        (username, password, password_salt, password_origin, mobile, avatar, role)
-      VALUES
-        ('${accountName}', '${hashPwd}', '${salt}', '${password}', '${mobile}', '${avatar}', 3)
-    `;
-    try {
-      await sequelize.query(registerSQL, { logging: false });
-      return {
-        code: 200,
-        msg: 'Success',
-      };
-    } catch (error) {
-      return {
-        code: 503,
-        msg: `Service error: ${error}`,
-      };
-    }
+
+    this.userRepository.insert({
+      username: accountName,
+      password: hashPwd,
+      password_salt: salt,
+      password_origin: password,
+      role: 3
+    })
+
+    return {
+      code: 200,
+      msg: 'Success',
+    };
   }
 
   async remove(id: number) {
-    const deleteSQL = `
-      DELETE FROM
-        shop_user
-      WHERE
-        id = ${id}
-    `;
-    await sequelize.query(deleteSQL, { logging: false });
+    this.userRepository.delete(id)
+    // const deleteSQL = `
+    //   DELETE FROM
+    //     shop_user
+    //   WHERE
+    //     id = ${id}
+    // `;
+    // await sequelize.query(deleteSQL, { logging: false });
     return {
       code: 200,
       msg: 'Success',
