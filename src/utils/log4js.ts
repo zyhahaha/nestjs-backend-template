@@ -5,11 +5,11 @@ const winston = require('winston');
 const { ElasticsearchTransport } = require('winston-elasticsearch');
 
 const logger = winston.createLogger({
-  level: 'info',
+  level: 'debug',
   format: winston.format.json(),
   transports: [
     new ElasticsearchTransport({
-      level: 'info',
+      level: 'debug',
       clientOpts: {
         node: 'http://43.143.122.98:9222',
         // auth: {
