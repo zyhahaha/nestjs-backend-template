@@ -46,33 +46,32 @@ export class ContextTrace {
 }
 
 export class Logger {
-  static debug(...args) {
-    logger.debug(Logger.getStackTrace(), ...args);
+  static debug(logMsg) {
+    const msg = `${Logger.getStackTrace()}${logMsg}`
+    logger.debug(msg);
   }
 
-  static log(...args) {
-    logger.info(Logger.getStackTrace(), ...args);
+  static log(logMsg) {
+    const msg = `${Logger.getStackTrace()}${logMsg}`
+    logger.info(msg);
   }
 
-  static info(...args) {
-    logger.info(Logger.getStackTrace(), ...args);
+  static info(logMsg) {
+    const msg = `${Logger.getStackTrace()}${logMsg}`
+    logger.info(msg);
   }
 
-  static warn(...args) {
-    logger.warn(Logger.getStackTrace(), ...args);
+  static warn(logMsg) {
+    const msg = `${Logger.getStackTrace()}${logMsg}`
+    logger.warn(msg);
   }
 
-  static warning(...args) {
-    logger.warn(Logger.getStackTrace(), ...args);
+  static error(logMsg) {
+    const msg = `${Logger.getStackTrace()}${logMsg}`
+    logger.error(msg);
   }
 
-  static error(...args) {
-    logger.error(Logger.getStackTrace(), ...args);
-  }
-
-  static access(...args) {
-    // const loggerCustom = Log4js.getLogger('http');
-    // loggerCustom.info(Logger.getStackTrace(), ...args);
+  static access(logMsg) {
   }
 
   // 日志追踪，可以追溯到哪个文件、第几行第几列
