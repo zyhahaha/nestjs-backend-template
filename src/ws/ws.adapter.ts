@@ -42,7 +42,7 @@ export class WsAdapter implements WebSocketAdapter {
                 message = JSON.parse(bufferData);
             } catch (error) {
                 message = {
-                    event: 'text',
+                    event: 'hello',
                     data: bufferData,
                 }
             }
