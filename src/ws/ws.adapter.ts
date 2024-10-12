@@ -37,7 +37,15 @@ export class WsAdapter implements WebSocketAdapter {
     ): Observable<any> {
         let message = null;
         try {
-            message = JSON.parse(buffer.data);
+            const bufferData = buffer.data;
+            try {
+                message = JSON.parse(bufferData);
+            } catch (error) {
+                message = {
+                    event: 'text',
+                    data: bufferData,
+                }
+            }
         } catch (error) {
             console.log('ws解析json出错', error);
             return EMPTY;
