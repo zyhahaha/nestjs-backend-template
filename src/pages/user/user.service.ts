@@ -1,7 +1,4 @@
 import { Injectable } from '@nestjs/common';
-// import * as Sequelize from 'sequelize'; // 引入 Sequelize 库
-// import sequelize from 'src/database/sequelize'; // 引入 Sequelize 实例
-
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
@@ -15,7 +12,7 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>,
   ) { }
 
-  // 获取文章列表
+  // 获取列表
   async findAll(requestBody): Promise<any> {
     const { pageIndex = 1, pageSize = 10, account = '', mobile = '' } = requestBody;
     // 分页查询条件
@@ -109,13 +106,6 @@ export class UserService {
 
   async remove(id: number) {
     this.userRepository.delete(id)
-    // const deleteSQL = `
-    //   DELETE FROM
-    //     shop_user
-    //   WHERE
-    //     id = ${id}
-    // `;
-    // await sequelize.query(deleteSQL, { logging: false });
     return {
       code: 200,
       msg: 'Success',
