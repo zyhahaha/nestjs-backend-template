@@ -1,5 +1,6 @@
 import * as Path from 'path';
 import * as StackTrace from 'stacktrace-js';
+import config from 'src/config/index';
 
 const winston = require('winston');
 const { ElasticsearchTransport } = require('winston-elasticsearch');
@@ -11,7 +12,7 @@ const logger = winston.createLogger({
     new ElasticsearchTransport({
       level: 'debug',
       clientOpts: {
-        node: 'http://43.143.122.98:9222',
+        node: config.elasticsearch.url,
         // auth: {
         //   username: '用户名',
         //   password: '密码'

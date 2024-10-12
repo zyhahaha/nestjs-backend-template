@@ -1,4 +1,11 @@
 const localConfig = {
+  elasticsearch: {
+    url: 'http://localhost:9222',
+    auth: {
+      username: '用户名',
+      password: '密码'
+    }
+  },
   db: {
     mysql: {
       port: 3306,
