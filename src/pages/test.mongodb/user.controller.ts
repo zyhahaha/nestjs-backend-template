@@ -1,4 +1,3 @@
-/* user.controller.ts */
 // 引入 Nest.js 内置的各个功能
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 // 引入用户服务

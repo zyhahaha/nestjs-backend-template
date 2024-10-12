@@ -1,4 +1,3 @@
-/* user.service.ts */
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './user.schema';
