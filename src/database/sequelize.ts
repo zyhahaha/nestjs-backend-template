@@ -1,21 +1,21 @@
 import { Sequelize } from 'sequelize-typescript';
-import dbConfig from 'src/config/db';
+import config from 'src/config/index';
 
 const sequelize = new Sequelize(
-  dbConfig.mysql.database,
-  dbConfig.mysql.user,
-  dbConfig.mysql.password || null,
+  config.db.mysql.database,
+  config.db.mysql.user,
+  config.db.mysql.password || null,
   {
     // 自定义主机; 默认值: localhost
-    host: dbConfig.mysql.host, // 数据库地址
+    host: config.db.mysql.host, // 数据库地址
     // 自定义端口; 默认值: 3306
-    port: dbConfig.mysql.port,
+    port: config.db.mysql.port,
     dialect: 'mysql',
     logging: (sql, timing) => {  
       console.log(`Executed (${timing}ms): ${sql}`);  
     },
     pool: {
-      max: dbConfig.mysql.connectionLimit, // 连接池中最大连接数量
+      max: config.db.mysql.connectionLimit, // 连接池中最大连接数量
       min: 0, // 连接池中最小连接数量
       acquire: 30000,
       idle: 10000, // 如果一个线程 10 秒钟内没有被使用过的话，那么就释放线程

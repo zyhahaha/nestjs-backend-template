@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 // import { MongooseModule } from '@nestjs/mongoose';
-import dbConfig from 'src/config/db';
+import config from 'src/config/index';
 // 业务模块
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -22,14 +22,14 @@ import { WsStartGateway } from './ws/ws.gateway'
     AuthModule,
     FileModule,
     // MailerModule,
-    // MongooseModule.forRoot(dbConfig.mongodb.url)
+    // MongooseModule.forRoot(config.db.mongodb.url)
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: dbConfig.mysql.host,
-      port: dbConfig.mysql.port,
-      username: dbConfig.mysql.user,
-      password: dbConfig.mysql.password,
-      database: dbConfig.mysql.database,
+      host: config.db.mysql.host,
+      port: config.db.mysql.port,
+      username: config.db.mysql.user,
+      password: config.db.mysql.password,
+      database: config.db.mysql.database,
       timezone: '+08:00',
       autoLoadEntities: true,
       synchronize: false,
