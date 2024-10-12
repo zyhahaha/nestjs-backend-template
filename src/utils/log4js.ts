@@ -22,29 +22,6 @@ const logger = winston.createLogger({
   ],
 });
 
-// 日志级别
-export enum LoggerLevel {
-  ALL = 'ALL',
-  MARK = 'MARK',
-  TRACE = 'TRACE',
-  DEBUG = 'DEBUG',
-  INFO = 'INFO',
-  WARN = 'WARN',
-  ERROR = 'ERROR',
-  FATAL = 'FATAL',
-  OFF = 'OFF',
-}
-
-// 内容跟踪类
-export class ContextTrace {
-  constructor(
-    public readonly context: string,
-    public readonly path?: string,
-    public readonly lineNumber?: number,
-    public readonly columnNumber?: number,
-  ) { }
-}
-
 export class Logger {
   static debug(logMsg) {
     const msg = `${Logger.getStackTrace()}${logMsg}`
