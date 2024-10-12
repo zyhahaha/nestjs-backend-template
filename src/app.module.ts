@@ -12,7 +12,7 @@ import { AuthModule } from './pages/auth/auth.module';
 import { FileModule } from './pages/file/file.module';
 // import { MailerModule } from './pages/mailer/mailer.module';
 
-// import { WsStartGateway } from './ws/ws.gateway'
+import { WsStartGateway } from './ws/ws.gateway'
 
 @Module({
   imports: [
@@ -36,6 +36,6 @@ import { FileModule } from './pages/file/file.module';
     }),
   ],
   controllers: [AppController, UserController],
-  providers: [AppService],
+  providers: [AppService, WsStartGateway],
 })
 export class AppModule {}
