@@ -10,9 +10,8 @@
 * 文件上传
 
 ### 特性
-* 支持
+* 支持Elasticsearch日志查询
 * 支持Docker部署
-* 支持ESLint
 * 支持TypeScript
 * 支持JWT权限验证
 * 支持Swagger API文档
